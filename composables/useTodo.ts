@@ -1,25 +1,7 @@
 import { useStorage } from '@vueuse/core';
+const todos = useStorage('todos', []) as any;
 
 export const useTodo = () => {
-  const todos = useStorage('todos', [
-    {
-      id: '1',
-      status: 'new',
-      name: 'My first todo',
-      tags: ['work', 'urgent'],
-      deadline: null,
-    },
-  ]) as any;
-  watch(
-    () => todos.value,
-    (to) => {
-      console.log(':W todos.value', to);
-    },
-    {
-      deep: true,
-    }
-  );
-
   const newTodo = ref({
     // id: null,
     // status: 'new',
@@ -33,7 +15,7 @@ export const useTodo = () => {
     console.log('_handleError', e);
     // TODO show notifications here
   }
-  function _getTodoById(id: string) {
+  function _getTodoById(id: string): any {
     const todo = todos.value.find((t: any) => t.id === id);
     if (!todo) throw new Error('No such todo found!');
     return todo;
@@ -46,8 +28,7 @@ export const useTodo = () => {
       tags: newTodo.value.tags,
       deadline: newTodo.value.deadline,
     };
-    // todos.value.unshift(payload);
-    todos.value = [payload, ...todos.value];
+    todos.value.unshift(payload);
     newTodo.value.name = '';
     newTodo.value.tags = [];
     newTodo.value.deadline = null;

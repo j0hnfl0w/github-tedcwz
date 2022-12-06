@@ -4,8 +4,6 @@ const props = defineProps({
 });
 const {
   todos,
-  todosNew,
-  todosCompleted,
   newTodo,
   addTodo,
   removeTodo,
@@ -16,13 +14,14 @@ const {
 
 const todosLocal = computed(() => {
   return todos.value.filter((t: any) => t.status === props.status);
-  // return [];
 });
 </script>
 
 <template>
   <div>
+    <!-- header -->
     <span>{{ props.status }}</span>
+    <!-- items -->
     <div
       v-for="t in todosLocal"
       :key="t.id"

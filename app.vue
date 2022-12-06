@@ -2,7 +2,7 @@
 
 <template>
   <div class="purple" style="padding: 8px">
-    <h4>NOVA-TODO!</h4>
+    <h4>NOVA-TODO</h4>
     <Creator />
     <TodosList status="new" />
     <TodosList status="completed" />
