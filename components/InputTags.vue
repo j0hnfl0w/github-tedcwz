@@ -7,10 +7,11 @@ const props = defineProps({
 });
 const emit = defineEmits(['update:model-value']);
 const refInput = ref(null);
+const MChips = ref(null);
 
 onMounted(() => {
   // logger.log(':onMounted');
-  const chipsInstances = M.Chips.init(refInput.value, {
+  MChips.value = M.Chips.init(refInput.value, {
     data: props.modelValue,
     placeholder: 'Enter tags',
     onChipAdd(e) {
@@ -26,6 +27,7 @@ onMounted(() => {
       emit('update:model-value', this.chipsData);
     },
   });
+  // logger.log(':MChips.value', MChips.value);
 });
 </script>
 

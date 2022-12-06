@@ -2,14 +2,14 @@ import { useStorage } from '@vueuse/core';
 const todos = useStorage('todos', []) as any;
 
 export const useTodo = () => {
-  const newTodo = ref({
-    // id: null,
-    // status: 'new',
-    // completed: false/true,
-    deadline: null,
+  const newTodoDefault = {
+    // id: '',
+    status: 'new',
     name: '',
+    deadline: null,
     tags: [],
-  });
+  };
+  const newTodo = ref(JSON.parse(JSON.stringify(newTodoDefault)));
 
   function _handleError(e: any) {
     console.log('_handleError', e);
@@ -29,9 +29,10 @@ export const useTodo = () => {
       deadline: newTodo.value.deadline,
     };
     todos.value.unshift(payload);
-    newTodo.value.name = '';
-    newTodo.value.tags = [];
-    newTodo.value.deadline = null;
+    addTodoCancel();
+  }
+  function addTodoCancel() {
+    newTodo.value = JSON.parse(JSON.stringify(newTodoDefault));
   }
   function undoTodo(id: string) {
     try {
@@ -77,6 +78,7 @@ export const useTodo = () => {
 
     newTodo,
     addTodo,
+    addTodoCancel,
     removeTodo,
     editTodo,
     undoTodo,

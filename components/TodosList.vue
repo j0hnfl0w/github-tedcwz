@@ -15,6 +15,11 @@ const todosLocal = computed(() => {
     <!-- header -->
     <span>{{ props.status }}</span>
     <!-- items -->
-    <TodoItem v-for="t in todosLocal" :key="t.id" :item="t"></TodoItem>
+    <TodoItem
+      v-for="t in todosLocal"
+      :key="t.id"
+      :item="t"
+      :style="{ marginBottom: '8px' }"
+    ></TodoItem>
   </div>
 </template>
